@@ -1,11 +1,10 @@
-// types/index.ts
+// In your types/index.ts file
 
 export type Incident = {
   id: string;
-  name?: string; // ✅ UPDATED THIS LINE
+  name?: string;
+  title: string; // ✅ Corrected and made required
   status: 'NEW' | 'PENDING' | 'DONE' | 'ATTENDING' | string;
-  tittle?: string;
-  title?: string;
   location?: { 
     latitude: number;
     longitude: number; 
