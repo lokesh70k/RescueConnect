@@ -3,7 +3,7 @@
 export type Incident = {
   id: string;
   name?: string; // ✅ UPDATED THIS LINE
-  status?: 'NEW' | 'PENDING' | 'DONE' | 'ATTENDING' | string;
+  status: 'NEW' | 'PENDING' | 'DONE' | 'ATTENDING' | string;
   tittle?: string;
   title?: string;
   location?: { 
