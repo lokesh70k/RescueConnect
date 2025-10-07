@@ -2,6 +2,7 @@
 
 export type Incident = {
   id: string;
+  name?: string; // ✅ UPDATED THIS LINE
   status?: 'NEW' | 'PENDING' | 'DONE' | 'ATTENDING' | string;
   tittle?: string;
   title?: string;
@@ -14,7 +15,6 @@ export type Incident = {
   responderId?: string;
   responderName?: string;
   responderType?: string;
-  // ✅ ADDED these boolean flags
   policehelp?: boolean;
   ambulancehelp?: boolean;
   firehelp?: boolean;

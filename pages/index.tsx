@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import mapboxgl, { Map } from "mapbox-gl";
 
 // --- Main Page Component ---
@@ -24,30 +24,78 @@ export default function HomePage() {
   );
 }
 
-// --- Header Component ---
-const Header = () => (
-  <header className="absolute top-0 left-0 right-0 z-20">
-    <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-      <div className="flex-shrink-0">
-        <Link href="/" title="RescueConnect Home" className="flex items-center gap-3">
-          {/* ✅ FIX: Pointing to the new high-contrast SVG logo */}
-          <img className="w-auto h-12" src="/images/r1.png" alt="RescueConnect Logo" />
-        </Link>
+// --- Header Component (Optimized with Hamburger Menu) ---
+const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // State to control menu visibility
+
+  return (
+    <header className="absolute top-0 left-0 right-0 z-20">
+      <div className="container mx-auto px-6 py-4 flex items-center justify-between">
+        <div className="flex-shrink-0">
+          <Link href="/" title="RescueConnect Home" className="flex items-center gap-3">
+            <img className="w-auto h-12" src="/images/r1.png" alt="RescueConnect Logo" />
+          </Link>
+        </div>
+
+        {/* --- Desktop Menu (Visible on large screens only) --- */}
+        <nav className="hidden lg:flex items-center space-x-8">
+          <Link href="/loginp" className="text-base font-medium text-gray-300 hover:text-white transition-colors">Police</Link>
+          <Link href="/loginf" className="text-base font-medium text-gray-300 hover:text-white transition-colors">Fire Force</Link>
+          <Link href="/logina" className="text-base font-medium text-gray-300 hover:text-white transition-colors">Ambulance</Link>
+        </nav>
+        <div className="hidden lg:flex items-center space-x-4">
+          <Link href="/login" className="text-base font-medium text-gray-300 hover:text-white transition-colors">Log In</Link>
+          <Link href="/distressForm" className="inline-flex items-center justify-center px-6 py-2.5 text-base font-semibold text-white bg-blue-600 rounded-full hover:bg-blue-700 transition-all">
+            Report Incident
+          </Link>
+        </div>
+
+        {/* --- Hamburger Menu Button (Visible on mobile only) --- */}
+        <div className="lg:hidden">
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="text-white focus:outline-none"
+          >
+            {/* Hamburger Icon */}
+            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+          </button>
+        </div>
       </div>
-      <nav className="hidden lg:flex items-center space-x-8">
-        <Link href="/loginp" className="text-base font-medium text-gray-300 hover:text-white transition-colors">Police</Link>
-        <Link href="/loginf" className="text-base font-medium text-gray-300 hover:text-white transition-colors">Fire Force</Link>
-        <Link href="/logina" className="text-base font-medium text-gray-300 hover:text-white transition-colors">Ambulance</Link>
-      </nav>
-      <div className="hidden lg:flex items-center space-x-4">
-        <Link href="/login" className="text-base font-medium text-gray-300 hover:text-white transition-colors">Log In</Link>
-        <Link href="/distressForm" className="inline-flex items-center justify-center px-6 py-2.5 text-base font-semibold text-white bg-blue-600 rounded-full hover:bg-blue-700 transition-all">
-          Report Incident
-        </Link>
-      </div>
-    </div>
-  </header>
-);
+
+      {/* --- Mobile Menu Panel (Shows when isMenuOpen is true) --- */}
+      {isMenuOpen && (
+        <div className="lg:hidden absolute top-0 left-0 w-full bg-slate-900 shadow-lg py-4">
+          <div className="container mx-auto px-6">
+             <div className="flex justify-between items-center mb-4">
+                 <img className="w-auto h-10" src="/images/r1.png" alt="RescueConnect Logo" />
+                  <button
+                    onClick={() => setIsMenuOpen(false)}
+                    className="text-white focus:outline-none"
+                  >
+                     {/* Close Icon */}
+                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+             </div>
+            <nav className="flex flex-col items-center space-y-4">
+              <Link href="/loginp" className="text-lg font-medium text-gray-300 hover:text-white transition-colors">Police</Link>
+              <Link href="/loginf" className="text-lg font-medium text-gray-300 hover:text-white transition-colors">Fire Force</Link>
+              <Link href="/logina" className="text-lg font-medium text-gray-300 hover:text-white transition-colors">Ambulance</Link>
+              <hr className="w-full border-slate-700 my-2" />
+              <Link href="/login" className="text-lg font-medium text-gray-300 hover:text-white transition-colors">Log In</Link>
+              <Link href="/distressForm" className="w-full text-center px-6 py-2.5 text-lg font-semibold text-white bg-blue-600 rounded-full hover:bg-blue-700 transition-all">
+                Report Incident
+              </Link>
+            </nav>
+          </div>
+        </div>
+      )}
+    </header>
+  );
+};
 
 // --- Hero Section with Interactive Map ---
 const HeroSection = () => (
