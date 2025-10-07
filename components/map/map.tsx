@@ -15,7 +15,7 @@ if (process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN) {
 }
 
 function PopupComponent({ data }: { data: Incident }) {
-  const title = data.tittle || data.title;
+  const title = data.title;
   return (
     <div className="p-1 bg-white rounded shadow-lg">
       <h3 className="font-sans text-sm font-bold text-black">{title?.toUpperCase()}</h3>
