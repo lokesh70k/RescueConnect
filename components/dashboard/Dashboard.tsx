@@ -34,7 +34,7 @@ export default function Dashboard() {
     const db = getFirestore();
     const q = query(collection(db, "fire"), orderBy("datetime", "desc"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      const incidentsList: Incident[] = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      const incidentsList: Incident[] = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Incident));
       setIncidents(incidentsList);
       setLoading(false);
     });
