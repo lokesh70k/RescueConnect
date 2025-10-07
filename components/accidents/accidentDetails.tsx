@@ -15,7 +15,7 @@ export default function AccidentDetails({ incident }: AccidentDetailsProps) {
         .toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })
     : 'N/A';
   
-  const displayTitle = incident.tittle || 'Incident Report';
+  const displayTitle = incident.title || 'Incident Report';
   
   const statusStyles = {
     'NEW': 'bg-red-100 text-red-800',
