@@ -6,7 +6,7 @@ import {
   signOut,
   User, // Import the official User type from Firebase
 } from "firebase/auth";
-import { auth } from "../config/firebase";
+import { auth } from "../config/firebase"; // This line will now work correctly
 
 // Define the shape of your context data for strong typing
 interface AuthContextType {
@@ -28,7 +28,6 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        // ✅ FIX: This saves the ENTIRE user object, including email and UID
         setUser(user);
       } else {
         setUser(null);
