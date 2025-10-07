@@ -23,7 +23,7 @@ const IncidentCard = ({ incident, onIncidentSelect, onUpdateStatus }: IncidentCa
         .toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })
     : 'Date not available';
   
-  const displayTitle = incident.title || incident.tittle || 'Incident Report';
+  const displayTitle = incident.title || 'Incident Report';
 
   useEffect(() => {
     const fetchAddress = async () => {
