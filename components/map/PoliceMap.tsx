@@ -58,7 +58,7 @@ export default function PoliceMap({ selectedIncident, incidents }: PoliceMapProp
           el.innerHTML = `<div class="marker-stable-yellow"></div>`;
         }
         
-        const popupText = incident.title || incident.tittle || 'Incident';
+        const popupText = incident.title || 'Incident';
         const newMarker = new mapboxgl.Marker({ element: el })
           .setLngLat([incident.location.longitude, incident.location.latitude])
           .setPopup(new mapboxgl.Popup({ offset: 25 }).setText(popupText))
