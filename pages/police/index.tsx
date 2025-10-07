@@ -61,7 +61,7 @@ function PoliceDashboardComponent({ user, incidents, loading, selectedIncident, 
                         <IncidentList 
                             incidents={incidents} 
                             loading={loading}
-                            onIncidentSelect={setSelectedIncident}
+                            onIncidentSelect={(incident) => setSelectedIncident(incident)}
                             onUpdateStatus={handleUpdateStatus}
                         />
                     </div>
